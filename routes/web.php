@@ -4,14 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GreetController;
 use App\Http\Controllers\TaskController;
 
-// Remove the default welcome route since we're using GreetController
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Keep the default Laravel welcome page
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// Greet routes
-Route::get('/', [GreetController::class, 'index']);
-Route::post('/greet', [GreetController::class, 'greet'])->name('greet');
+// Greet routes - moved to /greet path
+Route::get('/greet', [GreetController::class, 'index'])->name('greet.form');
+Route::post('/greet/submit', [GreetController::class, 'greet'])->name('greet.submit');
 
-// Task routes - make sure the URL is 'task' not 'tasks'
+// Task routes remain at /task
 Route::resource('task', TaskController::class);
